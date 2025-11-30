@@ -6,20 +6,7 @@ O projeto "Polling and Voting" é uma API REST desenvolvida em Java com Spring B
 
 ## Diagrama das Entidades e Relacionamentos
 
-```
-+----------------+        1        +----------------+        1        +-------------+
-|    Survey      |----------------|    Option      |----------------|    Vote     |
-+----------------+     (1:N)      +----------------+     (1:N)      +-------------+
-| id (UUID)      |                | id (UUID)      |                | id (UUID)   |
-| title          |                | text           |                | dateVote    |
-| createdAt      |                | survey_id (FK) |                | option_id   |
-| expiresAt      |                +----------------+                +-------------+
-| active         |
-+----------------+
-```
-- Uma `Survey` possui várias `Option`.
-- Cada `Option` pertence a uma única `Survey` e pode ter vários `Vote`.
-- Cada `Vote` está associado a uma única `Option`.
+![Diagrama ER](er.png)
 
 ## Lista de Endpoints
 
