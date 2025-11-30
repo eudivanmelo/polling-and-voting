@@ -1,0 +1,22 @@
+@startuml
+entity Survey {
+  * id : UUID
+  * title : String
+  * createdAt : LocalDateTime
+  * expiresAt : LocalDateTime
+  * active : boolean
+}
+
+entity Option {
+  * id : UUID
+  * text : String
+}
+
+entity Vote {
+  * id : UUID
+  * dateVote : LocalDateTime
+}
+
+Survey ||--o{ Option : "1:N"
+Option ||--o{ Vote : "1:N"
+@enduml
