@@ -2,7 +2,7 @@
 
 ## Tema do Projeto e Justificativa
 
-O projeto "Polling and Voting" é uma API REST desenvolvida em Java com Spring Boot para gerenciar enquetes (pesquisas), opções de voto e votos de usuários. O objetivo é fornecer uma solução simples e robusta para criação, votação e apuração de resultados de enquetes online, facilitando a integração com sistemas web e mobile. A justificativa para o projeto é a necessidade recorrente de sistemas de votação em ambientes acadêmicos, eventos, pesquisas de opinião e decisões rápidas em grupos, onde a transparência e a facilidade de uso são essenciais.
+O projeto "Polling and Voting" é uma API REST construída em Java com Spring Boot, destinada a gerenciar enquetes, opções de voto e os votos dos usuários. A ideia é oferecer uma solução prática e confiável para criar, votar e apurar resultados de enquetes online, tornando a integração com sistemas web e mobile mais fácil. A razão para desenvolver esse projeto vem da necessidade comum de sistemas de votação em contextos acadêmicos, em eventos, em pesquisas de opinião, e para decisões rápidas em grupos, onde a transparência e a facilidade de uso são super importantes.
 
 ## Diagrama das Entidades e Relacionamentos
 
