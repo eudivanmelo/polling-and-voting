@@ -9,5 +9,5 @@ import br.edu.ifrn.polling_and_voting.domain.entities.Vote;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, UUID> {
-
+    boolean existsByUserIdAndOptionSurveyId(Long userId, UUID surveyId);
 }

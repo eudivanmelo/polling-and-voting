@@ -34,7 +34,8 @@ public interface SurveyControllerDoc {
     @Operation(summary = "Criar pesquisa")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Pesquisa criada com sucesso"),
-        @ApiResponse(responseCode = "400", description = "Dados inválidos")
+        @ApiResponse(responseCode = "400", description = "Dados inválidos"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado - autenticação necessária")
     })
     ResponseEntity<SurveyResponseDTO> createSurvey(SurveyCreateDTO dto);
 
@@ -42,6 +43,7 @@ public interface SurveyControllerDoc {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Pesquisa atualizada com sucesso"),
         @ApiResponse(responseCode = "400", description = "Dados inválidos"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado - apenas o criador pode atualizar"),
         @ApiResponse(responseCode = "404", description = "Pesquisa não encontrada")
     })
     ResponseEntity<SurveyDetailResponseDTO> updateSurvey(UUID id, SurveyUpdateDTO dto);
@@ -49,6 +51,7 @@ public interface SurveyControllerDoc {
     @Operation(summary = "Remover pesquisa")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Pesquisa removida com sucesso"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado - apenas o criador pode deletar"),
         @ApiResponse(responseCode = "404", description = "Pesquisa não encontrada")
     })
     ResponseEntity<Void> deleteSurvey(UUID id);

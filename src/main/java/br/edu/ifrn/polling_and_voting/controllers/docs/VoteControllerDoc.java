@@ -16,6 +16,7 @@ public interface VoteControllerDoc {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Voto registrado com sucesso"),
         @ApiResponse(responseCode = "400", description = "Pesquisa inativa ou expirada"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado - autenticação necessária"),
         @ApiResponse(responseCode = "404", description = "Opção não encontrada")
     })
     ResponseEntity<VoteResponseDTO> vote(VoteCreateDTO dto);

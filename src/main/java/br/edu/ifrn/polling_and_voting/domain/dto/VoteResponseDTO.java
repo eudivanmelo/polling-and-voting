@@ -16,6 +16,7 @@ public class VoteResponseDTO {
     private LocalDateTime dateVote;
     private UUID optionId;
     private String optionText;
+    private String username;
 
     public static VoteResponseDTO fromEntity(Vote vote) {
         VoteResponseDTO dto = new VoteResponseDTO();
@@ -23,6 +24,7 @@ public class VoteResponseDTO {
         dto.setDateVote(vote.getDateVote());
         dto.setOptionId(vote.getOption().getId());
         dto.setOptionText(vote.getOption().getText());
+        dto.setUsername(vote.getUser().getUsername());
         return dto;
     }
 }

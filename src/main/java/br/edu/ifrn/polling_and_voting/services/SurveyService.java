@@ -15,8 +15,11 @@ import br.edu.ifrn.polling_and_voting.domain.dto.SurveyResponseDTO;
 import br.edu.ifrn.polling_and_voting.domain.dto.SurveyResultDTO;
 import br.edu.ifrn.polling_and_voting.domain.dto.SurveyUpdateDTO;
 import br.edu.ifrn.polling_and_voting.domain.entities.Survey;
+import br.edu.ifrn.polling_and_voting.domain.entities.User;
 import br.edu.ifrn.polling_and_voting.repositories.SurveyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 @RequiredArgsConstructor
@@ -39,10 +42,14 @@ public class SurveyService {
 
     @Transactional
     public SurveyResponseDTO createSurvey(SurveyCreateDTO dto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         Survey survey = new Survey();
         survey.setTitle(dto.getTitle());
         survey.setExpiresAt(dto.getExpiresAt());
         survey.setActive(true);
+        survey.setCreator(user);
 
         Survey savedSurvey = surveyRepository.save(survey);
         return SurveyResponseDTO.fromEntity(savedSurvey);
@@ -50,8 +57,15 @@ public class SurveyService {
 
     @Transactional
     public SurveyDetailResponseDTO updateSurvey(UUID id, SurveyUpdateDTO dto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         Survey survey = surveyRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pesquisa não encontrada"));
+
+        if (!survey.getCreator().getId().equals(user.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você não tem permissão para editar esta pesquisa");
+        }
 
         if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
             survey.setTitle(dto.getTitle());
@@ -67,8 +81,16 @@ public class SurveyService {
 
     @Transactional
     public void deleteSurvey(UUID id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         Survey survey = surveyRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pesquisa não encontrada"));
+
+        if (!survey.getCreator().getId().equals(user.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você não tem permissão para deletar esta pesquisa");
+        }
+
         surveyRepository.delete(survey);
     }
 

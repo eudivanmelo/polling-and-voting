@@ -20,6 +20,7 @@ public class SurveyDetailResponseDTO {
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
     private boolean active;
+    private String creatorUsername;
     private List<OptionResponseDTO> options;
 
     public static SurveyDetailResponseDTO fromEntity(Survey survey) {
@@ -29,6 +30,7 @@ public class SurveyDetailResponseDTO {
         dto.setCreatedAt(survey.getCreatedAt());
         dto.setExpiresAt(survey.getExpiresAt());
         dto.setActive(survey.isActive());
+        dto.setCreatorUsername(survey.getCreator().getUsername());
         
         if (survey.getOptions() != null) {
             dto.setOptions(survey.getOptions().stream()

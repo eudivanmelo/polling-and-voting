@@ -38,4 +38,9 @@ public class Vote {
     @JoinColumn(name = "option_id", nullable = false)
     @JsonIgnore
     private Option option;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private User user;
 }

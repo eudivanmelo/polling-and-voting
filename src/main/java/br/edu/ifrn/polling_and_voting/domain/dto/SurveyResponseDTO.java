@@ -18,6 +18,7 @@ public class SurveyResponseDTO {
     private LocalDateTime expiresAt;
     private boolean active;
     private Long totalVotes;
+    private String creatorUsername;
 
     public static SurveyResponseDTO fromEntity(Survey survey) {
         SurveyResponseDTO dto = new SurveyResponseDTO();
@@ -26,6 +27,7 @@ public class SurveyResponseDTO {
         dto.setCreatedAt(survey.getCreatedAt());
         dto.setExpiresAt(survey.getExpiresAt());
         dto.setActive(survey.isActive());
+        dto.setCreatorUsername(survey.getCreator().getUsername());
         
         long totalVotes = 0;
         if (survey.getOptions() != null) {

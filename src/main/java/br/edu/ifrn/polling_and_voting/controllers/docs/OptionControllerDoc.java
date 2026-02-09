@@ -18,6 +18,7 @@ public interface OptionControllerDoc {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Opção criada com sucesso"),
         @ApiResponse(responseCode = "400", description = "Dados inválidos ou pesquisa inativa"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado - apenas o criador pode adicionar opções"),
         @ApiResponse(responseCode = "404", description = "Pesquisa não encontrada")
     })
     ResponseEntity<OptionResponseDTO> addOption(UUID surveyId, OptionCreateDTO dto);
@@ -26,6 +27,7 @@ public interface OptionControllerDoc {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Opção removida com sucesso"),
         @ApiResponse(responseCode = "400", description = "Opção já possui votos"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado - apenas o criador pode deletar opções"),
         @ApiResponse(responseCode = "404", description = "Opção não encontrada")
     })
     ResponseEntity<Void> deleteOption(UUID id);
